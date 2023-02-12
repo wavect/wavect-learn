@@ -1,0 +1,14 @@
+smart-contracts/node_modules
+out
+out.code
+proving.key
+verification.key
+witness
+node_modules/
+.env
+*.r1cs
+*.wtns
+.idea/
+build/
+dist/
+.next/

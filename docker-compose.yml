@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  # Execute zokrates commands within contracts/zk to have everything in one folder by default
+  zokratest:
+    image: zokrates/zokrates
+    volumes:
+      - ./:/home/zokrates/code
+    command:
+      - "/bin/bash"
+    stdin_open: true
+    tty: true

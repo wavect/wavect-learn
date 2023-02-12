@@ -1,0 +1,19 @@
+[profile.default]
+src = 'src'
+out = 'out'
+libs = ['lib']
+solc = "0.8.16"
+optimizer = true
+optimizer_runs = 10000
+gas_reports = ['*']
+etherscan_api_key="4WSWEEHUBEMDB85A9SWF3N3SZ9FN7MWSVD"
+
+[rpc_endpoints]
+goerli = "${GOERLI_RPC_URL}"
+mumbai = "${MUMBAI_RPC_URL}"
+
+[etherscan]
+goerli = { key = "${ETHERSCAN_API_KEY}" }
+mumbai = { key = "${POLYSCAN_API_KEY}" }
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config

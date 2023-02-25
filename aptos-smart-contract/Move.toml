@@ -1,0 +1,11 @@
+[package]
+name = 'AptosFirstContract'
+version = '1.0.0'
+
+[dependencies.AptosFramework]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'devnet'
+subdir = 'aptos-move/framework/aptos-framework'
+
+[addresses]
+sender = "0xbbc657e79d1b1d5efcf592566bd763569e9d9852306125c5e027f4ed898ceb00"

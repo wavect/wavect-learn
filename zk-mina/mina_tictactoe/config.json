@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "deployAliases": {
+    "tictactoe": {
+      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
+      "keyPath": "keys/tictactoe.json",
+      "fee": "0.1",
+      "smartContract": "TicTacToe"
+    }
+  }
+}

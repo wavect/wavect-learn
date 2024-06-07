@@ -1,7 +1,5 @@
-# wavect-learn
-Repo containing several learning projects. 
+# Wavect Learn
 
-### Goals for week starting on 26 Feb 23
+Repo containing several in-house learning projects. 
 
-* Christof: Mina genauer, React App umbauen 
-* Kevin: Mina genauer, React App umbauen
+If you think something should be here, drop it!

@@ -3,6 +3,7 @@ import {createAccount} from "../functions/create-account.js";
 import {Hbar} from "@hashgraph/sdk";
 import {createTransaction} from "../functions/create-transaction.js";
 import {createQueryChainData} from "../functions/create-query-chain-data.js";
+import {createFungibleToken, createToken} from "../functions/create-token.js";
 
 describe('Hedera tests', () => {
     it('should create the environment', () => {
@@ -25,14 +26,20 @@ describe('Hedera tests', () => {
 
 
     it('should send some Hbars to another accountId', async () => {
-        const txRes = await createTransaction( '0.0.4430384')
+        const txRes = await createTransaction('0.0.4430384')
         expect(txRes.status.toString()).toEqual("SUCCESS")
     });
 
     it('should browse the chain and estimate cots', async () => {
-        const {queryCost, getNewBalance}  = await createQueryChainData();
+        const {queryCost, getNewBalance} = await createQueryChainData();
         console.log('querycosts is: ', queryCost)
         expect(queryCost).toEqual(Hbar.fromTinybars(0))
         expect(+getNewBalance.hbars._valueInTinybar).toBeGreaterThan(100000000)
+    });
+
+    it('should creatie a token', async () => {
+        const tx = await createFungibleToken();
+        // token already associated to account => otherwise created!
+        expect(tx).toBeDefined()
     });
 });

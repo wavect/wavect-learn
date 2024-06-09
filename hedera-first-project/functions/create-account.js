@@ -1,36 +1,16 @@
-const {
-    Hbar,
-    Client,
-    PrivateKey,
-    AccountBalanceQuery,
-    AccountCreateTransaction,
-} = require("@hashgraph/sdk");
+import {Hbar, Client, PrivateKey, AccountBalanceQuery, AccountCreateTransaction} from "@hashgraph/sdk";
+import {getClient} from "./create-client.js";
+
 require("dotenv").config();
 
-function wait(seconds) {
+const wait = (seconds) => {
     return new Promise((resolve) => {
         setTimeout(resolve, seconds * 1000);
     });
 }
 
-async function createAccount() {
-    // Grab your Hedera testnet account ID and private key from your .env file
-    const myAccountId = process.env.MY_ACCOUNT_ID;
-    const myPrivateKey = process.env.MY_PRIVATE_KEY;
-
-    // If we weren't able to grab it, we should throw a new error
-    if (myAccountId == null || myPrivateKey == null) {
-        throw new Error(
-            "Environment variables myAccountId and myPrivateKey must be present"
-        );
-    }
-
-    // Create your connection to the Hedera Network
-    const client = Client.forTestnet();
-    client.setOperator(myAccountId, myPrivateKey);
-    client.setDefaultMaxTransactionFee(new Hbar(100));
-    client.setMaxQueryPayment(new Hbar(50));
-
+export const createAccount = async () => {
+    const client = getClient();
     // Create new keys
     const newAccountPrivateKey = PrivateKey.generateED25519();
     const newAccountPublicKey = newAccountPrivateKey.publicKey;
@@ -47,7 +27,7 @@ async function createAccount() {
 
     console.log("\nNew account ID: " + newAccountId);
 
-    await wait(3);
+    await wait(5);
 
     // Verify the account balance
     const accountBalance = await new AccountBalanceQuery()
@@ -60,9 +40,8 @@ async function createAccount() {
         " tinybar."
     );
 
-    return newAccountId;
+    return {
+        accountBalance,
+        newAccountId
+    };
 }
-
-createAccount();
-
-

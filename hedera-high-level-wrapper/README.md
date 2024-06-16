@@ -1,13 +1,16 @@
-### Hedera High Level Wrapper
+# Exploring Hedera
 
 Welcome to this Hedera High Level Wrapper package.
 
-I've encapsulated a couple of functions within these high level wrapper
+I've encapsulated a couple of functions within this repository.
 
-This tutorial is split in two sections. Section one incorporates some theoretical knowledge and the second part
-incorporates a technical and programmatical approach to the Hedera network
+This tutorial is split in two sections.
 
-## Theoretical
+`Section one` incorporates some theoretical knowledge.
+
+`Section two` incorporates a technical and programmatical approach to the Hedera network
+
+## Section one: Things to know
 
 #### What is Hedera?
 
@@ -58,22 +61,19 @@ application events.
 
 Create a topic
 
-```java
+```javascript
     // Create a new topic
-    final TransactionId transactionId = new ConsensusTopicCreateTransaction().execute(client);
-    
-    // Grab the newly generated topic ID
-    final ConsensusTopicId topicId = transactionId.getReceipt(client).getConsensusTopicId();
-    
-    System.out.println("Your topic ID is: " +topicId);
+const transactionId = new ConsensusTopicCreateTransaction().execute(client);
+
+// Grab the newly generated topic ID
+const topicId = transactionId.getReceipt(client).getConsensusTopicId();
 ```
 
 Create your first message
 
-```java
-
+```javascript
     // Submit a message to a topic
-    new ConsensusMessageSubmitTransaction()
+const response = new ConsensusMessageSubmitTransaction()
     .setTopicId(topicId)
     .setMessage("Hellooooooo")
     .execute(client)
@@ -102,17 +102,18 @@ gas per second.
 
 You can write the contract in Solidity, deploy it and access it through the `Hedera SDK` with Typescript (e.g.)
 
-## Practical Examples
+`Examples are shown in section 2`
 
-Each example is presented with a specific testcase. Hence, you can run the example yourself and play around. \
+## Section Two: Let's get practical
 
-## Simple alerts
+Each example is presented with a specific testcase. Hence, you can run the example yourself and play around.
 
-` ⚠ Get insights`
+` ⚠ Watch out for ACT comments`
 
 Each test contains an `ACT` comment.
 
 This is the part where I abstracted things away to get a more readable test case.
+
 Hence, by analyzing the method marked with `ACT` you can see the necessary steps you need to undergo to implement this
 on your end.
 
@@ -123,7 +124,7 @@ on your end.
 Create your Hedera Testnet Client to interact with Hedera
 
 ```typescript
-        const clientConfiguration: ClientConfiguration = {
+const clientConfiguration: ClientConfiguration = {
     accountId: TEST_ACCOUNT_ID,
     accountPrivateKey: TEST_MY_PRIVATE_KEY,
     network: "testnet",
@@ -144,7 +145,7 @@ const client = createClient(clientConfiguration);
 Create an Hedera Testnet Account
 
 ```typescript
-    const client = createClient({
+const client = createClient({
     accountId: TEST_ACCOUNT_ID,
     accountPrivateKey: TEST_MY_PRIVATE_KEY,
     network: "testnet",
@@ -159,12 +160,12 @@ const {
 
 -------
 
-#### Transfer
+#### Create an transfer
 
 Transfer HBar from A to B
 
 ```typescript
-    const client = createClient({
+const client = createClient({
     accountId: TEST_ACCOUNT_ID,
     accountPrivateKey: TEST_MY_PRIVATE_KEY,
     network: "testnet",
@@ -189,17 +190,17 @@ const txResult = await transfer(
 Create yourself a token, either `fungle` or `non-fungible`.
 
 ```typescript
-    const tokenConfig: TokenConfig = {
-        account: {
-            id: TEST_ACCOUNT_ID,
-            privateKey: TEST_MY_PRIVATE_KEY
-        },
-        initialTokenSupply: 1_000_000,
-        tokenDecimals: "10",
-        tokenName: "Fungible Token",
-        tokenSymbol: "FUNGI",
-        type: TokenType.FungibleCommon
-    }
+const tokenConfig: TokenConfig = {
+    account: {
+        id: TEST_ACCOUNT_ID,
+        privateKey: TEST_MY_PRIVATE_KEY
+    },
+    initialTokenSupply: 1_000_000,
+    tokenDecimals: "10",
+    tokenName: "Fungible Token",
+    tokenSymbol: "FUNGI",
+    type: TokenType.FungibleCommon
+}
 
     /** @ACT: Create new token */
     const token = await createToken(tokenConfig);

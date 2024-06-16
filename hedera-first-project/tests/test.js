@@ -1,4 +1,4 @@
-import {getClient} from "../functions/create-client.js";
+import {createClient} from "../functions/create-client.js";
 import {createAccount} from "../functions/create-account.js";
 import {Hbar} from "@hashgraph/sdk";
 import {createTransaction} from "../functions/create-transaction.js";
@@ -10,7 +10,7 @@ describe('Hedera tests', () => {
         process.env.MY_ACCOUNT_ID = '0.0.4422584'
         process.env.MY_PRIVATE_KEY = '3030020100300706052b8104000a04220420b0188253c6fc175ad4ead53b4ab28349f45c44b1153232aac19d965918cc625b'
 
-        const client = getClient();
+        const client = createClient();
         expect(client).toBeDefined();
     });
 

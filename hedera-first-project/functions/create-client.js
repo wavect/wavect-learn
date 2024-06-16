@@ -1,6 +1,6 @@
 import {Hbar, Client,} from "@hashgraph/sdk";
 
-export const getClient = () => {
+export const createClient = () => {
     const myAccountId = process.env.MY_ACCOUNT_ID;
     const myPrivateKey = process.env.MY_PRIVATE_KEY;
 

@@ -1,8 +1,8 @@
 import {Hbar, TransferTransaction} from "@hashgraph/sdk";
-import {getClient} from "./create-client.js";
+import {createClient} from "./create-client.js";
 
 export const createTransaction = async (toAddress) => {
-    const client = getClient();
+    const client = createClient();
 
     const myAccountId = process.env.MY_ACCOUNT_ID;
 

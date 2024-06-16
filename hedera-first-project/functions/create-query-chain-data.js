@@ -1,8 +1,8 @@
 import {AccountBalanceQuery} from "@hashgraph/sdk";
-import {getClient} from "./create-client.js";
+import {createClient} from "./create-client.js";
 
 export const createQueryChainData = async () => {
-    const client = getClient();
+    const client = createClient();
     const myAccountId = process.env.MY_ACCOUNT_ID;
 
     //Request the cost of the query

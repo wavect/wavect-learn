@@ -1,5 +1,5 @@
 import {Hbar, Client, PrivateKey, AccountBalanceQuery, AccountCreateTransaction} from "@hashgraph/sdk";
-import {getClient} from "./create-client.js";
+import {createClient} from "./create-client.js";
 
 require("dotenv").config();
 
@@ -10,7 +10,7 @@ const wait = (seconds) => {
 }
 
 export const createAccount = async () => {
-    const client = getClient();
+    const client = createClient();
     // Create new keys
     const newAccountPrivateKey = PrivateKey.generateED25519();
     const newAccountPublicKey = newAccountPrivateKey.publicKey;

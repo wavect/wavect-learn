@@ -1,7 +1,7 @@
 import { Hbar, Client } from "@hashgraph/sdk";
 import { ClientConfiguration } from "../types/types";
 
-export const getClient = (clientConfiguration: ClientConfiguration): Client => {
+export const createClient = (clientConfiguration: ClientConfiguration): Client => {
   let client;
 
   if (clientConfiguration.network === "testnet") {

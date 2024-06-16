@@ -1,4 +1,4 @@
-import {createAccount, createToken, getClient, transfer} from "../src";
+import {createAccount, createToken, createClient, transfer} from "../src";
 import {TEST_ACCOUNT_ID, TEST_MY_PRIVATE_KEY} from "./src/static.testfiles";
 import {ClientConfiguration, TokenConfig} from "../types/types";
 import {AccountBalanceQuery, AccountId, TokenType, TransactionReceipt} from "@hashgraph/sdk";
@@ -14,17 +14,21 @@ describe("Hedera Example tests", () => {
                 defaultMaxQueryPayment: 50,
             },
         };
-        const client = getClient(clientConfiguration);
+
+        // ACT
+        const client = createClient(clientConfiguration);
+
         expect(client).toBeDefined();
         await client.close();
     });
     it("should create a new account", async () => {
-        const client = getClient({
+        const client = createClient({
             accountId: TEST_ACCOUNT_ID,
             accountPrivateKey: TEST_MY_PRIVATE_KEY,
             network: "testnet",
         });
 
+        // ACT
         const {accountId, accountCreationReceipt} = await createAccount({
             client,
         });
@@ -33,13 +37,13 @@ describe("Hedera Example tests", () => {
         expect(accountCreationReceipt).toBeInstanceOf(TransactionReceipt);
     }, 15_000);
     it("should transfer Hbar from a to b", async () => {
-        const client = getClient({
+        const client = createClient({
             accountId: TEST_ACCOUNT_ID,
             accountPrivateKey: TEST_MY_PRIVATE_KEY,
             network: "testnet",
         });
 
-        // create a receiver address
+        // ACT
         const {accountId: receiverAccountId} = await createAccount({client});
 
         const txResult = await transfer(
@@ -73,6 +77,8 @@ describe("Hedera Example tests", () => {
             tokenSymbol: "FUNGI",
             type: TokenType.FungibleCommon
         }
+
+        // ACT
         const token = await createToken(tokenConfig);
 
         expect(token.tokenId).toBeDefined();

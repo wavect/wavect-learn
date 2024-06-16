@@ -38,7 +38,9 @@ describe('Hedera tests', () => {
     });
 
     it('should creatie a token', async () => {
-        const tx = await createFungibleToken();
+        const tx = await createFungibleToken(
+
+        );
         // token already associated to account => otherwise created!
         expect(tx).toBeDefined()
     });
